@@ -21,7 +21,9 @@ jobs:
           node-version: 22
 
       - name: Generate npm Lockfile
-        run: npm install --package-lock-only --ignore-scripts --no-audit --no-fund --save=false
+        run: |
+          npm_config_package_lock=true npm install --package-lock-only --ignore-scripts --no-audit --no-fund
+          test -s package-lock.json
 
       - name: Upload Generated npm Lockfile
         uses: actions/upload-artifact@v4
