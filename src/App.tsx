@@ -19,6 +19,7 @@ import { UniversitiesView } from './components/views/UniversitiesView.tsx';
 import { CurriculaView } from './components/views/CurriculaView.tsx';
 import { CoursesView } from './components/views/CoursesView.tsx';
 import { LibraryView } from './components/views/LibraryView.tsx';
+import { ExternalLibrariesView } from './components/views/ExternalLibrariesView.tsx';
 import { SearchView } from './components/views/SearchView.tsx';
 import { SavedItemsView } from './components/views/SavedItemsView.tsx';
 import { AdminView } from './components/views/AdminView.tsx';
@@ -140,6 +141,7 @@ function MainApp() {
         {currentView === 'curricula' && <CurriculaView />}
         {currentView === 'courses' && <CoursesView onOpenAuth={() => setIsAuthModalOpen(true)} />}
         {currentView === 'library' && <LibraryView onOpenAuth={() => setIsAuthModalOpen(true)} />}
+{currentView === 'external-libraries' && <ExternalLibrariesView />}
         {currentView === 'search' && (
           <SearchView initialQuery={searchInitialQuery} onNavigate={handleNavigate} />
         )}

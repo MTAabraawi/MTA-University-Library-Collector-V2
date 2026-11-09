@@ -14,6 +14,7 @@ export type NavigationView =
   | 'curricula' 
   | 'courses' 
   | 'library' 
+  | 'external-libraries'
   | 'search' 
   | 'saved' 
   | 'admin';

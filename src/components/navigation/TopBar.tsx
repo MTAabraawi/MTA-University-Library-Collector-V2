@@ -20,6 +20,7 @@ import {
   ShieldCheck,
   BookOpen,
   Layers,
+  Library,
   Compass,
   Bookmark,
   LogOut,
@@ -54,6 +55,7 @@ export const TopBar: React.FC<TopBarProps> = ({
     { id: 'curricula', label: t.nav.curricula, icon: Layers },
     { id: 'courses', label: t.nav.courses, icon: BookOpen },
     { id: 'library', label: t.nav.library, icon: BookOpen },
+{ id: 'external-libraries', label: language === 'ar' ? 'المكتبات الخارجية' : 'External Libraries', icon: Library },
   ];
 
   const handleNavClick = (view: NavigationView) => {

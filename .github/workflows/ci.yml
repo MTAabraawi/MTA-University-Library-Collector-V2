@@ -2,7 +2,7 @@ name: CI - Continuous Integration & Quality Checks
 
 on:
   push:
-    branches: [ main, master ]
+    branches: [ main, master, feature/external-libraries-directory ]
   pull_request:
     branches: [ main, master ]
 
@@ -15,14 +15,23 @@ jobs:
       - name: Checkout Source Code
         uses: actions/checkout@v4
 
-      - name: Setup Node.js 20
+      - name: Setup Node.js 22
         uses: actions/setup-node@v4
         with:
-          node-version: 20
-          cache: 'npm'
+          node-version: 22
+
+      - name: Generate npm Lockfile
+        run: npm install --package-lock-only --ignore-scripts --no-audit --no-fund --save=false
+
+      - name: Upload Generated npm Lockfile
+        uses: actions/upload-artifact@v4
+        with:
+          name: MTA-University-Library-package-lock
+          path: package-lock.json
+          if-no-files-found: error
 
       - name: Install Dependencies
-        run: npm ci || npm install
+        run: npm ci --no-audit --no-fund
 
       - name: TypeScript Type Check
         run: npx tsc --noEmit
