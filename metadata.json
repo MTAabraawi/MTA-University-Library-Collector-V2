@@ -1,0 +1,6 @@
+{
+  "name": "MTA University Library Collector",
+  "description": "Professional academic directory, curricula explorer, and global digital library by MTA TECHNOLOGIES. Learn • Search • Explore.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

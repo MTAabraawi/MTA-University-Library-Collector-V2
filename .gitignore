@@ -1,0 +1,24 @@
+node_modules/
+build/
+dist/
+coverage/
+.aistudio/
+.DS_Store
+*.log
+.env*
+!.env.example
+
+# SQLite temporary files
+*.db-wal
+*.db-shm
+data/*.bak.db
+
+# Generated server-only credentials and operational data
+data/initial-admin-credentials.txt
+data/backups/
+data/uploads/
+
+# Local release archives
+MTA-University-Library-Collector-*.zip
+.playwright-cli/
+tmp/
