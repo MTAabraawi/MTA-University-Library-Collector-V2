@@ -3,7 +3,8 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useEffect, useState } from 'react';\nimport { initializeAppServices } from './services/monetization.ts';
+import React, { useEffect, useState } from 'react';
+import { initializeAppServices } from './services/monetization.ts';
 import { LanguageProvider, useLanguage } from './context/LanguageContext.tsx';
 import { ThemeProvider } from './context/ThemeContext.tsx';
 import { AuthProvider, useAuth } from './context/AuthContext.tsx';
