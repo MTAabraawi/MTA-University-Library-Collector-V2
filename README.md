@@ -42,12 +42,12 @@ The Express server also serves the Vite middleware in development and the built 
 
 ## Quick start
 
-Requirements: Node.js 20+ (developed with Node 26), Bun 1.1+ **or** npm.
+Requirements: Node.js 20+ and npm. The repository retains bun.lock for compatibility.
 
 ```bash
-bun install --frozen-lockfile
+npm install
 cp .env.example .env
-bun run dev
+npm run dev
 ```
 
 Open <http://localhost:3000>. The API health check is at `/api/health`.
@@ -60,14 +60,14 @@ See [docs/INSTALLATION.md](docs/INSTALLATION.md) for full setup, [docs/OPERATION
 
 | Command | Purpose |
 | --- | --- |
-| `bun run dev` | Development server (API + Vite) on port 3000 |
-| `bun run lint` | TypeScript check (`tsc --noEmit`) |
-| `bun run test` | Full automated test suite |
-| `bun run build` | Production frontend build into `dist/` |
-| `bun run start` | Production server serving `dist/` and the API |
-| `bun run db:integrity` | SQLite `integrity_check` and foreign-key check |
-| `bun run db:backup` | WAL-safe database backup into `data/backups/` |
-| `bun run db:restore -- <file>` | Restore a backup (takes a safety copy first) |
+| `npm run dev` | Development server (API + Vite) on port 3000 |
+| `npm run lint` | TypeScript check (`tsc --noEmit`) |
+| `npm run test` | Full automated test suite |
+| `npm run build` | Production frontend build into `dist/` |
+| `npm run start` | Production server serving `dist/` and the API |
+| `npm run db:integrity` | SQLite `integrity_check` and foreign-key check |
+| `npm run db:backup` | WAL-safe database backup into `data/backups/` |
+| `npm run db:restore -- <file>` | Restore a backup (takes a safety copy first) |
 
 ## Roles
 
@@ -110,7 +110,7 @@ All configuration is documented in [.env.example](.env.example). Secrets belong 
 
 ## Android
 
-The Capacitor project is at `android/` with package `com.mtatechnologies.universitylibrarycollector`. Web assets are built with `bun run build` and synced with `npx cap sync android`. A live backend can be supplied through `CAPACITOR_SERVER_URL`; otherwise the APK loads the bundled build and calls the same origin or `VITE_API_BASE_URL`.
+The Capacitor project is at `android/` with package `com.mtatechnologies.universitylibrarycollector`. Web assets are built with `npm run build` and synced with `npx cap sync android`. A live backend can be supplied through `CAPACITOR_SERVER_URL`; otherwise the APK loads the bundled build and calls the same origin or `VITE_API_BASE_URL`.
 
 **No APK was built in this environment** because no JDK or Android SDK is installed. The reproducible procedure and required versions are in [ANDROID_BUILD_GUIDE.md](ANDROID_BUILD_GUIDE.md).
 
@@ -125,3 +125,7 @@ The Capacitor project is at `android/` with package `com.mtatechnologies.univers
 ## License
 
 Source files carry `SPDX-License-Identifier: Apache-2.0`. Branding, name and logo belong to MTA TECHNOLOGIES. Academic metadata remains subject to the rights of its original publishers and institutions.
+
+## Android Release Build Status
+
+The Android release workflow completed successfully in GitHub Actions (run `42707047315`) and produced signed APK and AAB artifacts. The AAB passed `jarsigner` verification. Independent APK signature verification and physical-device testing remain separate outstanding checks. A successful CI build alone does not establish Google Play publication readiness.

@@ -3,13 +3,14 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';\nimport { initializeAppServices } from './services/monetization.ts';
 import { LanguageProvider, useLanguage } from './context/LanguageContext.tsx';
 import { ThemeProvider } from './context/ThemeContext.tsx';
 import { AuthProvider, useAuth } from './context/AuthContext.tsx';
 import { NavigationView } from './types/index.ts';
 import { TopBar } from './components/navigation/TopBar.tsx';
 import { Footer } from './components/navigation/Footer.tsx';
+import { PrivacySettingsModal } from './components/privacy/PrivacySettingsModal.tsx';
 import { HeroSection } from './components/home/HeroSection.tsx';
 import { CoverageBarometer } from './components/home/CoverageBarometer.tsx';
 import { FeaturedDirectorySection } from './components/home/FeaturedDirectorySection.tsx';
@@ -74,6 +75,7 @@ function MainApp() {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [isAccountModalOpen, setIsAccountModalOpen] = useState(false);
   const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
+  const [isPrivacySettingsOpen, setIsPrivacySettingsOpen] = useState(false);
   const [searchInitialQuery, setSearchInitialQuery] = useState('');
   const [institutions, setInstitutions] = useState<Array<{ id: number; nameAr: string; nameEn: string }>>([]);
 
@@ -160,8 +162,9 @@ function MainApp() {
         )}
       </main>
 
-      <Footer onNavigate={handleNavigate} />
+      <Footer onNavigate={handleNavigate} onOpenPrivacySettings={() => setIsPrivacySettingsOpen(true)} />
 
+      <PrivacySettingsModal isOpen={isPrivacySettingsOpen} onClose={() => setIsPrivacySettingsOpen(false)} />
       <QuickSearchModal
         isOpen={isSearchModalOpen}
         onClose={() => setIsSearchModalOpen(false)}
@@ -190,6 +193,10 @@ function MainApp() {
 }
 
 export default function App() {
+  useEffect(() => {
+    void initializeAppServices();
+  }, []);
+
   return (
     <LanguageProvider>
       <ThemeProvider>

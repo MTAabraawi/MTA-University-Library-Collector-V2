@@ -42,7 +42,7 @@ Choose one:
 
 1. Set the API origin at build time if the API is on another host:
    ```bash
-   VITE_API_BASE_URL=https://api.example.org bun run build
+   VITE_API_BASE_URL=https://api.example.org npm run build
    ```
 2. Leave `CAPACITOR_SERVER_URL` empty.
 3. `npx cap sync android` copies `dist/` into the native project.
@@ -60,9 +60,9 @@ The WebView loads that URL. HTTPS is required; HTTP is allowed only for delibera
 
 ```bash
 # 1. Install and verify the web app
-bun install --frozen-lockfile
-bun run lint
-bun run build
+npm install
+npm run lint
+npm run build
 
 # 2. Copy web assets and native configuration
 npx cap sync android
@@ -104,7 +104,7 @@ Configure the signing block in `android/app/build.gradle` or your CI secret stor
 
 ## 8. Release checklist
 
-- [ ] `bun run lint`, `bun run test`, `bun run build` pass.
+- [ ] `npm run lint`, `npm run test`, `npm run build` pass.
 - [ ] `npx cap sync android` completes.
 - [ ] API base URL is HTTPS and listed in `CORS_ORIGINS`.
 - [ ] Package ID remains `com.mtatechnologies.universitylibrarycollector`.
@@ -113,3 +113,7 @@ Configure the signing block in `android/app/build.gradle` or your CI secret stor
 - [ ] Ads/analytics remain disabled unless explicitly approved.
 - [ ] Signed AAB archived with its keystore and mapping file.
 - [ ] Store listing uses the official MTA TECHNOLOGIES identity and does not expose personal founder information.
+
+## Verified GitHub Actions Build
+
+GitHub Actions Android release run `42707047315` successfully produced signed APK and AAB artifacts. The AAB passed `jarsigner` verification. Independent APK signature verification, installation testing on physical devices, production backend validation, and Google Play policy review remain required before release submission.

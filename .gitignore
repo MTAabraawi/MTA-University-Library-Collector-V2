@@ -22,3 +22,6 @@ data/uploads/
 MTA-University-Library-Collector-*.zip
 .playwright-cli/
 tmp/
+
+# Local Firebase configuration
+android/app/google-services.json

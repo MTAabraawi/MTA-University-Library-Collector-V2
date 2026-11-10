@@ -203,7 +203,7 @@ const MetadataSchema = z.object({
   courseCode: z.string().trim().max(32).optional().default(''),
   semesterNumber: z.coerce.number().int().min(1).max(20).optional(),
   language: z.enum(['ar', 'en']).default('ar'),
-  licenseType: z.string().trim().min(3).max(200).default('Creative Commons CC-BY 4.0'),
+  licenseType: z.string().trim().min(3).max(200).default('unknown'),
   copyrightDeclarationAccepted: z.union([z.literal('true'), z.literal('on'), z.boolean()]).optional(),
   submitterName: z.string().trim().min(2).max(160).optional().default(''),
   submitterEmail: z.string().trim().email().max(320).optional().default(''),

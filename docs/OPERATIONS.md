@@ -5,14 +5,14 @@
 Development:
 
 ```bash
-bun run dev
+npm run dev
 ```
 
 Production:
 
 ```bash
-bun run build
-NODE_ENV=production bun run start
+npm run build
+NODE_ENV=production npm run start
 ```
 
 The process logs to stdout/stderr. Use your process supervisor (systemd, container runtime, PM2) to restart on failure and rotate logs. Health endpoint: `GET /api/health`.
@@ -22,19 +22,19 @@ Graceful shutdown is handled for `SIGTERM`/`SIGINT`; SQLite is closed and in-fli
 ## Database backups
 
 ```bash
-bun run db:backup
-bun run db:integrity
+npm run db:backup
+npm run db:integrity
 ```
 
 - Backups are created through SQLite's online backup API, so they are consistent while the server is running (WAL-safe).
 - Files land in `data/backups/` with a timestamp.
-- Verify with `bun run db:integrity`, which reports `integrity_check`, foreign-key violations and journal mode.
+- Verify with `npm run db:integrity`, which reports `integrity_check`, foreign-key violations and journal mode.
 - Keep at least one copy off the host. Backups contain user data (emails, password hashes) and must be protected like the database.
 
 ### Restore
 
 ```bash
-bun run db:restore -- data/backups/<file>.db
+npm run db:restore -- data/backups/<file>.db
 ```
 
 Stop the server first. The restore script creates a safety copy of the current database before replacing it, then runs an integrity check. Start the server and confirm `/api/health` and the directory.
@@ -101,11 +101,11 @@ The server sets security headers, disables API caching (`no-store`), rejects unk
 
 ## Upgrades
 
-1. Back up: `bun run db:backup`.
+1. Back up: `npm run db:backup`.
 2. Deploy code.
-3. Install with the lockfile: `bun install --frozen-lockfile`.
+3. Install with the lockfile: `npm install`.
 4. Start; additive migrations run automatically.
-5. Run `bun run db:integrity`, `bun run lint`, `bun run test`, and smoke-test sign-in, directory, library and uploads.
+5. Run `npm run db:integrity`, `npm run lint`, `npm run test`, and smoke-test sign-in, directory, library and uploads.
 
 ## Incident checklist
 

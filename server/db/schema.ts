@@ -372,7 +372,7 @@ export const uploadedDocuments = sqliteTable('uploaded_documents', {
   language: text('language').notNull().default('ar'),
   
   // Legal & Licensing Declarations
-  licenseType: text('license_type').notNull().default('Creative Commons CC-BY 4.0'),
+  licenseType: text('license_type').notNull().default('unknown'),
   copyrightDeclarationAccepted: integer('copyright_declaration_accepted', { mode: 'boolean' }).notNull().default(false),
   
   // Submitter details

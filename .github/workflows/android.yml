@@ -29,13 +29,28 @@ jobs:
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
         with:
-          packages: 'platform-tools'
+          packages: 'platform-tools platforms;android-36 build-tools;36.0.0'
+
+      - name: Generate npm Lockfile
+        run: |
+          npm_config_package_lock=true npm install --package-lock-only --ignore-scripts --no-audit --no-fund
+          test -s package-lock.json
 
       - name: Install Node Dependencies
-        run: npm install --no-audit --no-fund
+        run: npm ci --no-audit --no-fund
 
       - name: Build Web Application
         run: npm run build
+
+      - name: Restore Firebase Configuration
+        env:
+          GOOGLE_SERVICES_JSON_BASE64: ${{ secrets.GOOGLE_SERVICES_JSON_BASE64 }}
+        run: |
+          set -euo pipefail
+          test -n "$GOOGLE_SERVICES_JSON_BASE64"
+          printf '%s' "$GOOGLE_SERVICES_JSON_BASE64" | base64 --decode > android/app/google-services.json
+          python3 -c 'import json; d=json.load(open("android/app/google-services.json")); assert d["client"][0]["client_info"]["android_client_info"]["package_name"] == "com.mtatechnologies.universitylibrarycollector"; print("Firebase configuration validated.")'
+          chmod 600 android/app/google-services.json
 
       - name: Sync Capacitor Android Project
         run: npx cap sync android

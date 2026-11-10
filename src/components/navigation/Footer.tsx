@@ -12,9 +12,10 @@ import { ShieldCheck, Globe, BookOpen, ExternalLink } from 'lucide-react';
 
 interface FooterProps {
   onNavigate: (view: NavigationView) => void;
+  onOpenPrivacySettings: () => void;
 }
 
-export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
+export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenPrivacySettings }) => {
   const { t, language } = useLanguage();
   const { isPrivileged } = useAuth();
 
@@ -133,7 +134,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             {t.footer.copyright} · {t.brand.motto}
           </div>
           <div className="flex items-center gap-4">
-            <span className="hover:text-slate-400 cursor-pointer">{t.footer.privacyPolicy}</span>
+            <button type="button" onClick={onOpenPrivacySettings} className="hover:text-slate-400 transition-colors">{t.footer.privacyPolicy}</button>
             <span>·</span>
             <span className="hover:text-slate-400 cursor-pointer">{t.footer.termsOfService}</span>
           </div>

@@ -36,19 +36,6 @@ const config: CapacitorConfig = {
       showSpinner: true,
       spinnerColor: '#d97706',
     },
-    // AdMob and Firebase Analytics placeholders (disabled by default until configured)
-    AdMob: {
-      appId: 'ca-app-pub-3940256099942544~3347511713', // Google Official Test App ID
-      bannerAdUnitId: 'ca-app-pub-3940256099942544/6300978111', // Google Test Banner
-      interstitialAdUnitId: 'ca-app-pub-3940256099942544/1033173712',
-      rewardedAdUnitId: 'ca-app-pub-3940256099942544/5224354917',
-      testingDevices: ['EMULATOR'],
-      initializeForTesting: true,
-      enabled: false, // Strictly disabled by default
-    },
-    FirebaseAnalytics: {
-      enabled: false,
-    },
   },
 };
 

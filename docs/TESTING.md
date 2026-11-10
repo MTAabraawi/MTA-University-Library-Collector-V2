@@ -5,10 +5,10 @@ All results below were produced in this workspace on 2026-11-08. Tests use isola
 ## Commands
 
 ```bash
-bun run lint     # tsc --noEmit
-bun run test     # node test runner via tsx
-bun run build    # production Vite build
-bun run db:integrity
+npm run lint     # tsc --noEmit
+npm run test     # node test runner via tsx
+npm run build    # production Vite build
+npm run db:integrity
 ```
 
 ## Actual results
@@ -63,19 +63,23 @@ bun run db:integrity
 ## Reproducing the checks
 
 ```bash
-bun install --frozen-lockfile
-bun run lint
-bun run test
-bun run build
-bun run db:integrity
+npm install
+npm run lint
+npm run test
+npm run build
+npm run db:integrity
 ```
 
 To run the app:
 
 ```bash
 cp .env.example .env
-bun run dev
+npm run dev
 curl -s http://localhost:3000/api/health
 ```
 
 If a test fails, do not skip it or weaken assertions. Inspect the first failure; the suite creates its own temporary database and upload directory, so failures usually indicate a real route, validation or migration regression.
+
+## Android Build Evidence
+
+GitHub Actions Android release run `42707047315` successfully built signed APK and AAB artifacts. The AAB passed `jarsigner` verification. This confirms the CI build only; it does not confirm installation and runtime behavior on physical Android devices. Independent APK signature verification and device testing remain outstanding.

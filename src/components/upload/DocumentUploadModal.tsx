@@ -39,7 +39,7 @@ export const DocumentUploadModal: React.FC<DocumentUploadModalProps> = ({
   const [courseCode, setCourseCode] = useState('');
   const [semesterNumber, setSemesterNumber] = useState<string>('1');
   const [docLanguage, setDocLanguage] = useState<'ar' | 'en'>('ar');
-  const [licenseType, setLicenseType] = useState('Creative Commons CC-BY 4.0');
+  const [licenseType, setLicenseType] = useState('unknown');
   const [copyrightAccepted, setCopyrightAccepted] = useState(false);
 
   // Submitter details (Visitors or Authenticated users)
@@ -353,10 +353,13 @@ export const DocumentUploadModal: React.FC<DocumentUploadModalProps> = ({
                 onChange={(e) => setLicenseType(e.target.value)}
                 className="w-full p-2.5 rounded-lg bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white outline-none"
               >
-                <option value="Creative Commons CC-BY 4.0">Creative Commons CC-BY 4.0 (نسب المصنف حراً)</option>
-                <option value="Creative Commons CC-BY-NC 4.0">Creative Commons CC-BY-NC 4.0 (غير تجاري)</option>
-                <option value="Open Educational Resource (OER)">Open Educational Resource (OER)</option>
-                <option value="Public Domain">Public Domain (ملك عام أكاديمي)</option>
+                <option value="unknown">{language === 'ar' ? 'غير معروف — يحتاج إلى التحقق' : 'Unknown — verification required'}</option>
+                <option value="all_rights_reserved">{language === 'ar' ? 'جميع الحقوق محفوظة' : 'All rights reserved'}</option>
+                <option value="permission_pending">{language === 'ar' ? 'طلب إذن النشر قيد الانتظار' : 'Publication permission pending'}</option>
+                <option value="permission_granted">{language === 'ar' ? 'إذن النشر موثق' : 'Documented publication permission'}</option>
+                <option value="public_domain">Public Domain — {language === 'ar' ? 'ملك عام موثق' : 'Verified public domain'}</option>
+                <option value="Creative Commons CC-BY 4.0">Creative Commons CC-BY 4.0</option>
+                <option value="Creative Commons CC-BY-NC 4.0">Creative Commons CC-BY-NC 4.0</option>
               </select>
             </div>
           </div>

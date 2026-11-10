@@ -7,7 +7,7 @@ MTA University Library Collector — MTA TECHNOLOGIES
 | Component | Minimum |
 | --- | --- |
 | Node.js | 20 LTS (verified on Node 26) |
-| Package manager | Bun 1.1+ (lockfile: `bun.lock`) or npm |
+| Package manager | Node.js 20+ with npm (primary package manager); `bun.lock` is retained for compatibility |
 | OS | Linux, macOS or Windows (commands below use bash) |
 | Disk | ~500 MB with dependencies; plus uploads and backups |
 | PostgreSQL | Optional for production schema validation (not used by the runtime) |
@@ -24,7 +24,7 @@ cd MTA-University-Library-Collector
 Install with the committed lockfile — do not upgrade majors:
 
 ```bash
-bun install --frozen-lockfile
+npm install
 # npm equivalent: npm ci
 ```
 
@@ -65,8 +65,8 @@ Store the password securely and delete the credentials file. Sign in, change the
 ## 4. Preserve the database before first run
 
 ```bash
-bun run db:backup
-bun run db:integrity
+npm run db:backup
+npm run db:integrity
 ```
 
 Migrations run automatically and are additive/idempotent. They never drop tables or recreate the database. If you are upgrading an existing installation, keep the backup until you have verified the data.
@@ -74,7 +74,7 @@ Migrations run automatically and are additive/idempotent. They never drop tables
 ## 5. Start development
 
 ```bash
-bun run dev
+npm run dev
 ```
 
 - App and API: <http://localhost:3000>
@@ -86,13 +86,13 @@ The Vite middleware is served by Express, so there is no separate frontend port.
 ## 6. Production build
 
 ```bash
-bun run lint
-bun run test
-bun run build
-NODE_ENV=production bun run start
+npm run lint
+npm run test
+npm run build
+NODE_ENV=production npm run start
 ```
 
-`bun run build` writes the SPA to `dist/`. In production mode the server serves `dist/` and falls back to `index.html` for client routes. Put a TLS-terminating reverse proxy in front of port 3000 and set `TRUST_PROXY=true` only when that proxy is trusted.
+`npm run build` writes the SPA to `dist/`. In production mode the server serves `dist/` and falls back to `index.html` for client routes. Put a TLS-terminating reverse proxy in front of port 3000 and set `TRUST_PROXY=true` only when that proxy is trusted.
 
 ### Reverse proxy notes
 
